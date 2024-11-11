@@ -16,6 +16,9 @@ struct ContainerView: View {
             Tab("Outfits", systemImage: "tshirt") {
                 OutfitsView()
             }
+            Tab("Calendar", systemImage: "calendar") {
+                CalendarView()
+            }
         }
     }
 }
