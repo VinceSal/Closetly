@@ -9,34 +9,16 @@ import SwiftUI
 
 struct ContainerView: View {
     var body: some View {
-        
         TabView {
-            NavigationView {
-                           WardrobeView()
-                       }
-                       .tabItem {
-                           Label("Wardrobe", systemImage: "hanger")
-                       }
-                       
-            
-                       NavigationView {
-                           OutfitsView()
-                       }
-                       .tabItem {
-                           Label("Outfits", systemImage: "tshirt")
-                       }
-            
-            NavigationView {
-                CalendarView()
+            Tab("Wardrobe", systemImage: "hanger") {
+                WardrobeView()
             }
-            .tabItem {
-                Label("Calendar", systemImage: "calendar")
-              }
+            Tab("Outfits", systemImage: "tshirt") {
+                OutfitsView()
             }
-        
-         }
+        }
     }
-
+}
 
 #Preview {
     ContainerView()
