@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ShoesView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Start taking pictures of your shoes by clicking the + button on the top right.\n\nHave fun! 🥳")
+            .multilineTextAlignment(.center)
+            .padding()
+            .padding(.bottom, 100)
     }
 }
 

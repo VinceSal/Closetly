@@ -28,8 +28,9 @@ struct CalendarView: View {
                 
                 Spacer()
                 
-                Text("Empty")
-                    .font(.title2)
+                Text("Welcome to your Calendar page!\n\nPlan your daily outfits by choosing them\nfrom the Outfits Page.\n\nClick the + button and let’s start!💪")
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 100)
                 
                 Spacer()
             }

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct OutfitsView: View {
     var body: some View {
-        Text("OutfitsViewy5rtf5rtf")
+        Text("Welcome to your Outfits page!\n\nClick the + button at the top right to create your outfit.\n\nEnjoy! 🥰")
+            .multilineTextAlignment(.center)
+            .padding()
+            .padding(.bottom, 100)
     }
 }
 
