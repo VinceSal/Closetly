@@ -54,7 +54,7 @@ struct WardrobeView: View {
                 
                 NavigationLink(destination: JacketsView()) {
                     HStack {
-                        Image(systemName: "jacket.fill") // Icona della maglietta
+                        Image(systemName: "coat.fill") // Icona della maglietta
                             .font(.title2)
                             .foregroundColor(.black)
 
@@ -73,11 +73,11 @@ struct WardrobeView: View {
                 
                 NavigationLink(destination: PantsView()) {
                     HStack {
-                        Image(systemName: "pant.fill")
+                        Image(systemName: "hanger")
                             .font(.title2)
                             .foregroundColor(.black)
 
-                        Text("Jackets") // Scritta "Shirts"
+                        Text("Pants") // Scritta "Shirts"
                             .font(.title2)
                             .foregroundColor(.black)
 
@@ -111,7 +111,7 @@ struct WardrobeView: View {
                 
                 NavigationLink(destination: SweartshirtsView()) {
                     HStack {
-                        Image(systemName: "sweartshirt.fill")
+                        Image(systemName: "jacket")
                             .font(.title2)
                             .foregroundColor(.black)
 
