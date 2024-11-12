@@ -73,9 +73,21 @@ struct WardrobeView: View {
                 
                 NavigationLink(destination: PantsView()) {
                     HStack {
-                        Image(systemName: "hanger")
-                            .font(.title2)
-                            .foregroundColor(.black)
+                        ZStack(alignment: .trailing) {
+                            Image(systemName: "square")
+                                .frame(width: 16)
+                                .font(.system(size: 8))
+                                .foregroundStyle(.black)
+                                .padding(.bottom, 11)
+                            HStack(spacing: -9) {
+                                Image(systemName: "rectangle.portrait")
+                                    .font(.title3)
+                                    .foregroundColor(.black)
+                                Image(systemName: "rectangle.portrait")
+                                    .font(.title3)
+                                    .foregroundColor(.black)
+                            }
+                        }
 
                         Text("Pants") // Scritta "Shirts"
                             .font(.title2)
