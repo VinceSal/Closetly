@@ -86,5 +86,5 @@ struct ContainerView: View {
 }
 
 #Preview {
-    ContainerView()
+    ContainerView().environmentObject(WardrobeManager())
 }
