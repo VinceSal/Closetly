@@ -8,8 +8,69 @@
 import SwiftUI
 
 struct AddClothesView: View {
+    
+    var colors = ["White", "Black", "Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Brown", "Pink", "Multicolor"]
+    @State var selectedColor: String = "White"
+    
+    var types = ["Shirts", "Jackets", "Sweatshirts", "Pants", "Shoes", "Accessories"]
+    @State var selectedType: String = "Shirts"
+    
+    @State var description = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Button {
+                print("This is a button")
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.gray)
+                        .opacity(0.5)
+                        .padding()
+                        .frame(width: 300, height: 350)
+                    VStack {
+                        Image(systemName: "camera")
+                            .resizable()
+                            .frame(width: 50, height: 40)
+                        Text("Take a photo")
+                    }
+                }
+            }
+            HStack {
+                Text("Color:")
+                    .font(.title2)
+                    .bold()
+                Picker("Colors", selection: $selectedColor) {
+                    ForEach(colors, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(.menu)
+            }
+            HStack {
+                Text("Type:")
+                    .font(.title2)
+                    .bold()
+                Picker("Types", selection: $selectedType) {
+                    ForEach(types, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(.menu)
+            }
+            .padding(.bottom, 20)
+            VStack {
+                Text("Description:")
+                    .font(.title2)
+                    .bold()
+                TextField("(Optional)", text: $description, axis: .vertical)
+                    .lineLimit(5, reservesSpace: true)
+                    .multilineTextAlignment(.center)
+                    .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal, 70)
+            }
+        }
+        .padding(.bottom, 30)
     }
 }
 
