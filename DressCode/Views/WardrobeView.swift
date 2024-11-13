@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct WardrobeView: View {
+    
+    @State var addingClothes: Bool = false
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -143,16 +146,21 @@ struct WardrobeView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink(destination: AddClothesView()) {
+                    Button {
+                        addingClothes.toggle()
+                    } label: {
                         Image(systemName: "plus")
                             .foregroundColor(.black)
                     }
                 }
             }
-            .navigationTitle("Wardrobe")
+            .navigationTitle("Closets")
             .fontWeight(.bold)
             .padding(.top, -230)
-
+            .fullScreenCover(isPresented: $addingClothes) {
+                AddClothesView(addingClothes: $addingClothes)
+            }
+            
         }
     }
 }
