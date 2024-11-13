@@ -40,7 +40,7 @@ struct CalendarView: View {
                         showOutfits.toggle()
                     } label: {
                         Image(systemName: "plus")
-                            .font(.title)
+                            .foregroundColor(.black)
                     }
                 }
             }
