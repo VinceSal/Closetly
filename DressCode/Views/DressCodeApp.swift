@@ -9,12 +9,9 @@ import SwiftUI
 
 @main
 struct DressCodeApp: App {
-    @StateObject private var wardrobeManager = WardrobeManager()
-
-        var body: some Scene {
-            WindowGroup {
-                ContainerView()
-                    .environmentObject(wardrobeManager)
-            }
+    var body: some Scene {
+        WindowGroup {
+            ContainerView()
         }
     }
+}
