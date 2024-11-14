@@ -124,7 +124,7 @@ struct WardrobeView: View {
                 }
                 .padding(.horizontal)
                 
-                NavigationLink(destination: SweatshirtsView()) {
+                NavigationLink(destination: SweartshirtsView()) {
                     HStack {
                         Image(systemName: "jacket")
                             .font(.title2)
