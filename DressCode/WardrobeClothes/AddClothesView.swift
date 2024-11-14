@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddClothesView: View {
     
+    @Environment(\.modelContext) var modelContext
+    
     @Binding var addingClothes: Bool
     
     var colors = ["White", "Black", "Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Brown", "Pink", "Multicolor"]
@@ -82,8 +84,11 @@ struct AddClothesView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
+                        let newItem = Clothe(color: selectedColor, clotheType: selectedType, clotheDescription: description.isEmpty ? nil : description)
+                        modelContext.insert(newItem)
                         addingClothes.toggle()
                     }
+//                    .disabled(true) // To ensure they fill in the photo, color and type later
                 }
             })
         }
