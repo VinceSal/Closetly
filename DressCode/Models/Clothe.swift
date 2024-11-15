@@ -14,10 +14,12 @@ class Clothe: Identifiable {
     var color: String
     var clotheType: String
     var clotheDescription: String?
+    var imageData: Data?
     
-    init(color: String, clotheType: String, clotheDescription: String? = nil) {
+    init(color: String, clotheType: String, clotheDescription: String? = nil, imageData: Data? = nil) {
         self.color = color
         self.clotheType = clotheType
         self.clotheDescription = clotheDescription
+        self.imageData = imageData
     }
 }
