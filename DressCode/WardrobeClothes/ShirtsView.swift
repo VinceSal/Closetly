@@ -30,6 +30,8 @@ struct ShirtsView: View {
                     .onDelete(perform: deleteItems)
                 }
                 .scrollContentBackground(.hidden)
+                .scrollIndicators(.hidden)
+                .background(Color.white)
             }
         }
     }
