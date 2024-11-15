@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct SweartshirtsView: View {
+struct SweatshirtsView: View {
     
     @Environment(\.modelContext) var modelContext
     @Query(filter: #Predicate<Clothe> { clothe in
@@ -29,6 +29,9 @@ struct SweartshirtsView: View {
                     }
                     .onDelete(perform: deleteItems)
                 }
+                .scrollContentBackground(.hidden)
+                .scrollIndicators(.hidden)
+                .background(Color.white)
             }
         }
     }
@@ -43,5 +46,5 @@ struct SweartshirtsView: View {
 }
 
 #Preview {
-    SweartshirtsView()
+    SweatshirtsView()
 }

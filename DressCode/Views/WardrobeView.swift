@@ -10,138 +10,40 @@ import SwiftUI
 struct WardrobeView: View {
     
     @State var addingClothes: Bool = false
+    @State private var selectedSegment = 0
     
     var body: some View {
         NavigationStack {
             VStack {
-                // Button for WardrobeView
-                NavigationLink(destination: ShirtsView()) {
-                    HStack {
-                        Image(systemName: "tshirt.fill") // Icona della maglietta
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Text("Shirts") // Scritta "Shirts"
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Spacer() // Spazio per fare in modo che l'icona e il testo siano sulla sinistra
-                    }
-                    .padding()
-                    .background(Color.gray.opacity(0.2)) // Colore di sfondo del bottone
-                    .cornerRadius(10) // Raggio degli angoli per arrotondare il bottone
-                    .shadow(radius: 5) // Ombra per il bottone
-                }
-                .padding(.horizontal)
                 
-//                Spacer()
-                
-                NavigationLink(destination: AccessoriesView()) {
-                    HStack {
-                        Image(systemName: "sunglasses.fill") // Icona della maglietta
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Text("Accessories") // Scritta "Shirts"
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Spacer() // Spazio per fare in modo che l'icona e il testo siano sulla sinistra
-                    }
-                    .padding()
-                    .background(Color.gray.opacity(0.2)) // Colore di sfondo del bottone
-                    .cornerRadius(10) // Raggio degli angoli per arrotondare il bottone
-                    .shadow(radius: 5) // Ombra per il bottone
+                Picker("Select items", selection: $selectedSegment) {
+                    Text("Shirts").tag(0)
+                    Text("Sweatshirts").tag(1)
+                    Text("Jackets").tag(2)
+                    Text("Pants").tag(3)
+                    Text("Shoes").tag(4)
                 }
-                .padding(.horizontal)
+                .pickerStyle(.segmented)
+                .colorMultiply(.blue)
+                .padding()
                 
-                NavigationLink(destination: JacketsView()) {
-                    HStack {
-                        Image(systemName: "coat.fill") // Icona della maglietta
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Text("Jackets") // Scritta "Shirts"
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Spacer() // Spazio per fare in modo che l'icona e il testo siano sulla sinistra
-                    }
-                    .padding()
-                    .background(Color.gray.opacity(0.2)) // Colore di sfondo del bottone
-                    .cornerRadius(10) // Raggio degli angoli per arrotondare il bottone
-                    .shadow(radius: 5) // Ombra per il bottone
+                TabView(selection: $selectedSegment) {
+                    ShirtsView()
+                        .tag(0)
+                    SweatshirtsView()
+                        .tag(1)
+                    JacketsView()
+                        .tag(2)
+                    PantsView()
+                        .tag(3)
+                    ShoesView()
+                        .tag(4)
                 }
-                .padding(.horizontal)
-                
-                NavigationLink(destination: PantsView()) {
-                    HStack {
-                        ZStack(alignment: .trailing) {
-                            Image(systemName: "square")
-                                .frame(width: 16)
-                                .font(.system(size: 8))
-                                .foregroundStyle(.black)
-                                .padding(.bottom, 11)
-                            HStack(spacing: -9) {
-                                Image(systemName: "rectangle.portrait")
-                                    .font(.title3)
-                                    .foregroundColor(.black)
-                                Image(systemName: "rectangle.portrait")
-                                    .font(.title3)
-                                    .foregroundColor(.black)
-                            }
-                        }
-
-                        Text("Pants") // Scritta "Shirts"
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Spacer() // Spazio per fare in modo che l'icona e il testo siano sulla sinistra
-                    }
-                    .padding()
-                    .background(Color.gray.opacity(0.2)) // Colore di sfondo del bottone
-                    .cornerRadius(10) // Raggio degli angoli per arrotondare il bottone
-                    .shadow(radius: 5) // Ombra per il bottone
+                .frame(width:350, height: 500)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(.blue, lineWidth: 2)
                 }
-                .padding(.horizontal)
-                
-                NavigationLink(destination: ShoesView()) {
-                    HStack {
-                        Image(systemName: "shoe.fill")
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Text("Shoes") // Scritta "Shirts"
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Spacer() // Spazio per fare in modo che l'icona e il testo siano sulla sinistra
-                    }
-                    .padding()
-                    .background(Color.gray.opacity(0.2)) // Colore di sfondo del bottone
-                    .cornerRadius(10) // Raggio degli angoli per arrotondare il bottone
-                    .shadow(radius: 5) // Ombra per il bottone
-                }
-                .padding(.horizontal)
-                
-                NavigationLink(destination: SweartshirtsView()) {
-                    HStack {
-                        Image(systemName: "jacket")
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Text("Sweartshirts") // Scritta "Shirts"
-                            .font(.title2)
-                            .foregroundColor(.black)
-
-                        Spacer() // Spazio per fare in modo che l'icona e il testo siano sulla sinistra
-                    }
-                    .padding()
-                    .background(Color.gray.opacity(0.2)) // Colore di sfondo del bottone
-                    .cornerRadius(10) // Raggio degli angoli per arrotondare il bottone
-                    .shadow(radius: 5) // Ombra per il bottone
-                }
-                .padding(.horizontal)
                 
             }
             .toolbar {
@@ -154,9 +56,9 @@ struct WardrobeView: View {
                     }
                 }
             }
-            .navigationTitle("Closets")
+            .padding(.bottom, 80)
+            .navigationTitle("Wardrobe")
             .fontWeight(.bold)
-            .padding(.top, -230)
             .fullScreenCover(isPresented: $addingClothes) {
                 AddClothesView(addingClothes: $addingClothes)
             }
