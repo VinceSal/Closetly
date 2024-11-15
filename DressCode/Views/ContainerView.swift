@@ -66,9 +66,9 @@ struct ContainerView: View {
     var body: some View {
         if hasSeenWelcomeScreen {
             TabView {
-                WardrobeView()
+                ClosetView()
                     .tabItem {
-                        Label("Wardrobe", systemImage: "hanger")
+                        Label("Closet", systemImage: "hanger")
                     }
                 OutfitsView()
                     .tabItem {

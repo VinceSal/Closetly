@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WardrobeView: View {
+struct ClosetView: View {
     
     @State var addingClothes: Bool = false
     @State private var selectedSegment = 0
@@ -57,7 +57,7 @@ struct WardrobeView: View {
                 }
             }
             .padding(.bottom, 80)
-            .navigationTitle("Wardrobe")
+            .navigationTitle("Closet")
             .fontWeight(.bold)
             .fullScreenCover(isPresented: $addingClothes) {
                 AddClothesView(addingClothes: $addingClothes)
@@ -68,5 +68,5 @@ struct WardrobeView: View {
 }
 
 #Preview {
-    WardrobeView()
+    ClosetView()
 }
