@@ -16,7 +16,7 @@ struct AddClothesView: View {
     var colors = ["White", "Black", "Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Brown", "Pink", "Multicolor"]
     @State var selectedColor: String = "White"
     
-    var types = ["Shirts", "Jackets", "Sweatshirts", "Pants", "Shoes", "Accessories"]
+    var types = ["Shirts", "Jackets", "Sweatshirts", "Pants", "Shoes"]
     @State var selectedType: String = "Shirts"
     
     @State var description = ""

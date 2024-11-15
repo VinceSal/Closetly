@@ -18,11 +18,10 @@ struct WardrobeView: View {
                 
                 Picker("Select items", selection: $selectedSegment) {
                     Text("Shirts").tag(0)
-                    Text("Accessories").tag(1)
+                    Text("Sweatshirts").tag(1)
                     Text("Jackets").tag(2)
                     Text("Pants").tag(3)
                     Text("Shoes").tag(4)
-//                    Text("Sweatshirts").tag(5)
                 }
                 .pickerStyle(.segmented)
                 .colorMultiply(.blue)
@@ -31,7 +30,7 @@ struct WardrobeView: View {
                 TabView(selection: $selectedSegment) {
                     ShirtsView()
                         .tag(0)
-                    AccessoriesView()
+                    SweatshirtsView()
                         .tag(1)
                     JacketsView()
                         .tag(2)
@@ -39,8 +38,6 @@ struct WardrobeView: View {
                         .tag(3)
                     ShoesView()
                         .tag(4)
-//                    SweatshirtsView()
-//                        .tag(5)
                 }
                 .frame(width:350, height: 500)
                 .overlay {
