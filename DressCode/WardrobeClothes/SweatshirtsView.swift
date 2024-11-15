@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct SweartshirtsView: View {
+struct SweatshirtsView: View {
     
     @Environment(\.modelContext) var modelContext
     @Query(filter: #Predicate<Clothe> { clothe in
@@ -43,5 +43,5 @@ struct SweartshirtsView: View {
 }
 
 #Preview {
-    SweartshirtsView()
+    SweatshirtsView()
 }
