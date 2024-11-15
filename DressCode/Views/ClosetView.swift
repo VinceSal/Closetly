@@ -17,9 +17,9 @@ struct ClosetView: View {
             VStack {
                 
                 Picker("Select items", selection: $selectedSegment) {
-                    Text("Shirts").tag(0)
+                    Text("Jackets").tag(0)
                     Text("Sweatshirts").tag(1)
-                    Text("Jackets").tag(2)
+                    Text("Shirts").tag(2)
                     Text("Pants").tag(3)
                     Text("Shoes").tag(4)
                 }
@@ -28,11 +28,11 @@ struct ClosetView: View {
                 .padding()
                 
                 TabView(selection: $selectedSegment) {
-                    ShirtsView()
+                    JacketsView()
                         .tag(0)
                     SweatshirtsView()
                         .tag(1)
-                    JacketsView()
+                    ShirtsView()
                         .tag(2)
                     PantsView()
                         .tag(3)
