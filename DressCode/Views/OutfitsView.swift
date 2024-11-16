@@ -30,7 +30,7 @@ struct OutfitsView: View {
                     FavoriteOutfitsView()
                         .tag(1)
                 }
-                .frame(width:350, height: 580)
+                .frame(width:350, height: 500)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(.blue, lineWidth: 2)
