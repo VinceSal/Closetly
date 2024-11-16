@@ -15,7 +15,6 @@ struct ClosetView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                
                 Picker("Select items", selection: $selectedSegment) {
                     Text("Jackets").tag(0)
                     Text("Sweatshirts").tag(1)
@@ -25,7 +24,8 @@ struct ClosetView: View {
                 }
                 .pickerStyle(.segmented)
                 .colorMultiply(.blue)
-                .padding()
+                .padding(.horizontal)
+                .padding(.top)
                 
                 TabView(selection: $selectedSegment) {
                     JacketsView()
@@ -39,12 +39,7 @@ struct ClosetView: View {
                     ShoesView()
                         .tag(4)
                 }
-                .frame(width:350, height: 500)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.blue, lineWidth: 2)
-                }
-                
+                Spacer()
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -56,7 +51,6 @@ struct ClosetView: View {
                     }
                 }
             }
-            .padding(.bottom, 80)
             .navigationTitle("Closet")
             .fontWeight(.bold)
             .fullScreenCover(isPresented: $addingClothes) {

@@ -19,21 +19,31 @@ struct ShirtsView: View {
         VStack {
             if shirts.isEmpty {
                 Text("Start taking pictures of your shirts by clicking the + button on the top right.\n\nHave fun! 🥳")
+                    .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding()
-                    .padding(.bottom, 100)
+                    .padding(.bottom, 50)
             } else {
                 List {
                     ForEach(shirts) { shirt in
-                        Text(shirt.clotheDescription ?? "No description")
+                        HStack {
+                            Image(uiImage: UIImage(data: shirt.imageData)!)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                            Text(shirt.clotheDescription ?? "No description")
+                        }
                     }
                     .onDelete(perform: deleteItems)
                 }
+                .shadow(radius: 2)
                 .scrollContentBackground(.hidden)
-                .scrollIndicators(.hidden)
                 .background(Color.white)
             }
         }
+        .padding(.bottom, 50)
+        .ignoresSafeArea(edges: .bottom)
     }
     
     func deleteItems(at offsets: IndexSet) {

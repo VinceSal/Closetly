@@ -19,21 +19,31 @@ struct ShoesView: View {
         VStack {
             if shoes.isEmpty {
                 Text("Start taking pictures of your shoes by clicking the + button on the top right.\n\nHave fun! 🥳")
+                    .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding()
-                    .padding(.bottom, 100)
+                    .padding(.bottom, 50)
             } else {
                 List {
                     ForEach(shoes) { shoe in
-                        Text(shoe.clotheDescription ?? "No description")
+                        HStack {
+                            Image(uiImage: UIImage(data: shoe.imageData)!)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                            Text(shoe.clotheDescription ?? "No description")
+                        }
                     }
                     .onDelete(perform: deleteItems)
                 }
+                .shadow(radius: 2)
                 .scrollContentBackground(.hidden)
-                .scrollIndicators(.hidden)
                 .background(Color.white)
             }
         }
+        .padding(.bottom, 50)
+        .ignoresSafeArea(edges: .bottom)
     }
     
     func deleteItems(at offsets: IndexSet) {

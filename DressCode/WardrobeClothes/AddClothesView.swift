@@ -20,27 +20,59 @@ struct AddClothesView: View {
     @State var selectedType: String = "Jackets"
     
     @State var description = ""
-    @State private var image: UIImage?
+    @State var image: UIImage?
+    
+    @State var cameraMenu: Bool = false
+    @State var showGallery: Bool = false
+    @State var showCamera: Bool = false
     
     var body: some View {
         NavigationStack {
             VStack {
                 Button {
-                    print("This is a button")
+                    cameraMenu.toggle()
                 } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.gray)
-                            .opacity(0.5)
-                            .padding()
-                            .frame(width: 300, height: 350)
-                        VStack {
-                            Image(systemName: "camera")
-                                .resizable()
-                                .frame(width: 50, height: 40)
-                            Text("Take a photo")
+                    if image == nil {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.gray)
+                                .opacity(0.5)
+                                .padding()
+                                .frame(width: 300, height: 350)
+                            VStack {
+                                Image(systemName: "camera")
+                                    .resizable()
+                                    .frame(width: 50, height: 40)
+                                Text("Take a photo")
+                            }
                         }
+                    } else {
+                        Image(uiImage: image!)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 300, height: 350)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding()
                     }
+                }
+                .actionSheet(isPresented: $cameraMenu) {
+                    ActionSheet(title: Text("Choose a method"),
+                                buttons: [
+                                    .cancel(),
+                                    .default(
+                                        Text("Take a Picture"),
+                                        action: {
+                                            showCamera.toggle()
+                                        }
+                                    ),
+                                    .default(
+                                        Text("Choose from Gallery"),
+                                        action: {
+                                            showGallery.toggle()
+                                        }
+                                    )
+                                ]
+                    )
                 }
                 HStack {
                     Text("Color:")
@@ -85,13 +117,24 @@ struct AddClothesView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
-                        let newItem = Clothe(color: selectedColor, clotheType: selectedType, clotheDescription: description.isEmpty ? nil : description)
+                        let data = image?.jpegData(compressionQuality: 0.8)
+                        let newItem = Clothe(color: selectedColor, clotheType: selectedType, clotheDescription: description.isEmpty ? nil : description, imageData: data!)
                         modelContext.insert(newItem)
                         addingClothes.toggle()
                     }
-//                    .disabled(true) // To ensure they fill in the photo, color and type later
+                    .disabled(image == nil) // To ensure they fill in the photo
                 }
             })
+            .fullScreenCover(isPresented: $showCamera) {
+                ImagePicker(image: self.$image, sourceType: .camera)
+                    .edgesIgnoringSafeArea(.all)
+            }
+            
+            .fullScreenCover(isPresented: $showGallery) {
+                ImagePicker(image: self.$image, sourceType: .photoLibrary)
+                    .edgesIgnoringSafeArea(.bottom)
+                
+            }
         }
     }
 }
