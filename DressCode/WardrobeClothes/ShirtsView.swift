@@ -12,7 +12,7 @@ struct ShirtsView: View {
     
     @Environment(\.modelContext) var modelContext // Calling the swiftData container to a environment variable, to add, edit or delete stuff from the container
     @Query(filter: #Predicate<Clothe> { clothe in
-        clothe.clotheType == "Shirts"
+        clothe.clotheType == "Shirt"
     }) var shirts: [Clothe] // iterates through the array of clothes and filters the ones that are shirt type
     
     var body: some View {
@@ -32,7 +32,7 @@ struct ShirtsView: View {
                                 .scaledToFill()
                                 .frame(width: 50, height: 50)
                                 .clipShape(Circle())
-                            Text(shirt.clotheDescription ?? "No description")
+                            Text("\(shirt.color) \(shirt.clotheType)")
                         }
                     }
                     .onDelete(perform: deleteItems)

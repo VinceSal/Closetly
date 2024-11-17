@@ -12,7 +12,7 @@ struct JacketsView: View {
     
     @Environment(\.modelContext) var modelContext
     @Query(filter: #Predicate<Clothe> { clothe in
-        clothe.clotheType == "Jackets"
+        clothe.clotheType == "Jacket"
     }) var jackets: [Clothe]
     
     var body: some View {
@@ -32,7 +32,7 @@ struct JacketsView: View {
                                 .scaledToFill()
                                 .frame(width: 50, height: 50)
                                 .clipShape(Circle())
-                            Text(jacket.clotheDescription ?? "No description")
+                            Text("\(jacket.color) \(jacket.clotheType)")
                         }
                     }
                     .onDelete(perform: deleteItems)

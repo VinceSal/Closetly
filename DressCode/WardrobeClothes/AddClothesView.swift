@@ -16,8 +16,8 @@ struct AddClothesView: View {
     var colors = ["White", "Black", "Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Brown", "Pink", "Multicolor"]
     @State var selectedColor: String = "White"
     
-    var types = ["Jackets", "Sweatshirts", "Shirts", "Pants", "Shoes"]
-    @State var selectedType: String = "Jackets"
+    var types = ["Jacket", "Sweatshirt", "Shirt", "Pant", "Shoe"]
+    @State var selectedType: String = "Jacket"
     
     @State var description = ""
     @State var image: UIImage?
@@ -75,22 +75,22 @@ struct AddClothesView: View {
                     )
                 }
                 HStack {
-                    Text("Color:")
+                    Text("Type:")
                         .font(.title2)
                         .bold()
-                    Picker("Colors", selection: $selectedColor) {
-                        ForEach(colors, id: \.self) {
+                    Picker("Types", selection: $selectedType) {
+                        ForEach(types, id: \.self) {
                             Text($0)
                         }
                     }
                     .pickerStyle(.menu)
                 }
                 HStack {
-                    Text("Type:")
+                    Text("Color:")
                         .font(.title2)
                         .bold()
-                    Picker("Types", selection: $selectedType) {
-                        ForEach(types, id: \.self) {
+                    Picker("Colors", selection: $selectedColor) {
+                        ForEach(colors, id: \.self) {
                             Text($0)
                         }
                     }

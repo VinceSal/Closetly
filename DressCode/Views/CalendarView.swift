@@ -22,7 +22,7 @@ struct CalendarView: View {
                 )
                 .padding()
                 
-                Text("\(date.formatted(date: .long, time: .omitted)) outfit:")
+                Text("\(date.formatted(date: .long, time: .omitted)) outfits:")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
                 
