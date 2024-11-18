@@ -17,10 +17,10 @@ class Outfit: Identifiable {
     var imageSweatshirt: Data
     var imagePant: Data
     var imageShoe: Data
-    var isFavorite: Bool?
+    var isFavorite: Bool
     var assignedDate: Date?
     
-    init(name: String, imageJacket: Data, imageShirt: Data, imageSweatshirt: Data, imagePant: Data, imageShoe: Data, isFavorite: Bool? = nil, assignedDate: Date? = nil) {
+    init(name: String, imageJacket: Data, imageShirt: Data, imageSweatshirt: Data, imagePant: Data, imageShoe: Data, isFavorite: Bool = false, assignedDate: Date? = nil) {
         self.name = name
         self.imageJacket = imageJacket
         self.imageShirt = imageShirt
