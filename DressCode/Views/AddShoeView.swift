@@ -26,46 +26,53 @@ struct AddShoeView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 8) {
-                    ForEach(shoes.indices, id: \.self) { index in
-                        Button(action: {
-                            selectedShoe = index
-                        }) {
-                            Image(uiImage: UIImage(data: shoes[index].imageData)!)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(12)
-                                .clipped()
-                                .blur(radius: selectedShoe == index ? 5 : 0)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(selectedShoe == index ? Color.blue : Color.clear, lineWidth: 3)
-                                )
+            if !shoes.isEmpty {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 8) {
+                        ForEach(shoes.indices, id: \.self) { index in
+                            Button(action: {
+                                selectedShoe = index
+                            }) {
+                                Image(uiImage: UIImage(data: shoes[index].imageData)!)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 100, height: 100)
+                                    .cornerRadius(12)
+                                    .clipped()
+                                    .blur(radius: selectedShoe == index ? 5 : 0)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(selectedShoe == index ? Color.blue : Color.clear, lineWidth: 3)
+                                    )
+                            }
+                        }
+                    }
+                    .padding()
+                }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            chooseShoe.toggle()
+                        }
+                    }
+                    ToolbarItem(placement: .principal) {
+                        Text("Choose a Shoe")
+                            .font(.headline)
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Confirm") {
+                            if let index = selectedShoe {
+                                shoeImg = UIImage(data: shoes[index].imageData)
+                            }
+                            chooseShoe.toggle()
                         }
                     }
                 }
-                .padding()
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        chooseShoe.toggle()
-                    }
-                }
-                ToolbarItem(placement: .principal) {
-                    Text("Choose a Shoe")
-                        .font(.headline)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Confirm") {
-                        if let index = selectedShoe {
-                            shoeImg = UIImage(data: shoes[index].imageData)
-                        }
-                        chooseShoe.toggle()
-                    }
-                }
+            } else {
+                Text("No Shoes Available, add some to create awesome outfits!\n\n😀")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.secondary)
+                    .padding()
             }
         }
     }

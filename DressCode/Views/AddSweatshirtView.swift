@@ -26,46 +26,53 @@ struct AddSweatshirtView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 8) {
-                    ForEach(sweatshirts.indices, id: \.self) { index in
-                        Button(action: {
-                            selectedSweatshirt = index
-                        }) {
-                            Image(uiImage: UIImage(data: sweatshirts[index].imageData)!)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(12)
-                                .clipped()
-                                .blur(radius: selectedSweatshirt == index ? 5 : 0)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(selectedSweatshirt == index ? Color.blue : Color.clear, lineWidth: 3)
-                                )
+            if !sweatshirts.isEmpty {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 8) {
+                        ForEach(sweatshirts.indices, id: \.self) { index in
+                            Button(action: {
+                                selectedSweatshirt = index
+                            }) {
+                                Image(uiImage: UIImage(data: sweatshirts[index].imageData)!)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 100, height: 100)
+                                    .cornerRadius(12)
+                                    .clipped()
+                                    .blur(radius: selectedSweatshirt == index ? 5 : 0)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(selectedSweatshirt == index ? Color.blue : Color.clear, lineWidth: 3)
+                                    )
+                            }
+                        }
+                    }
+                    .padding()
+                }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            chooseSweatshirt.toggle()
+                        }
+                    }
+                    ToolbarItem(placement: .principal) {
+                        Text("Choose a Sweatshirt")
+                            .font(.headline)
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Confirm") {
+                            if let index = selectedSweatshirt {
+                                sweatshirtImg = UIImage(data: sweatshirts[index].imageData)
+                            }
+                            chooseSweatshirt.toggle()
                         }
                     }
                 }
-                .padding()
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        chooseSweatshirt.toggle()
-                    }
-                }
-                ToolbarItem(placement: .principal) {
-                    Text("Choose a Sweatshirt")
-                        .font(.headline)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Confirm") {
-                        if let index = selectedSweatshirt {
-                            sweatshirtImg = UIImage(data: sweatshirts[index].imageData)
-                        }
-                        chooseSweatshirt.toggle()
-                    }
-                }
+            } else {
+                Text("No Sweatshirts Available, add some to create awesome outfits!\n\n😀")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.secondary)
+                    .padding()
             }
         }
     }

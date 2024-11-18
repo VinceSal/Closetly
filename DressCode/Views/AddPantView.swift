@@ -26,46 +26,53 @@ struct AddPantView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 8) {
-                    ForEach(pants.indices, id: \.self) { index in
-                        Button(action: {
-                            selectedPant = index
-                        }) {
-                            Image(uiImage: UIImage(data: pants[index].imageData)!)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(12)
-                                .clipped()
-                                .blur(radius: selectedPant == index ? 5 : 0)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(selectedPant == index ? Color.blue : Color.clear, lineWidth: 3)
-                                )
+            if !pants.isEmpty {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 8) {
+                        ForEach(pants.indices, id: \.self) { index in
+                            Button(action: {
+                                selectedPant = index
+                            }) {
+                                Image(uiImage: UIImage(data: pants[index].imageData)!)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 100, height: 100)
+                                    .cornerRadius(12)
+                                    .clipped()
+                                    .blur(radius: selectedPant == index ? 5 : 0)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(selectedPant == index ? Color.blue : Color.clear, lineWidth: 3)
+                                    )
+                            }
+                        }
+                    }
+                    .padding()
+                }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            choosePant.toggle()
+                        }
+                    }
+                    ToolbarItem(placement: .principal) {
+                        Text("Choose a Pant")
+                            .font(.headline)
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Confirm") {
+                            if let index = selectedPant {
+                                pantImg = UIImage(data: pants[index].imageData)
+                            }
+                            choosePant.toggle()
                         }
                     }
                 }
-                .padding()
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        choosePant.toggle()
-                    }
-                }
-                ToolbarItem(placement: .principal) {
-                    Text("Choose a Pant")
-                        .font(.headline)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Confirm") {
-                        if let index = selectedPant {
-                            pantImg = UIImage(data: pants[index].imageData)
-                        }
-                        choosePant.toggle()
-                    }
-                }
+            } else {
+                Text("No Pants Available, add some to create awesome outfits!\n\n😀")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.secondary)
+                    .padding()
             }
         }
     }

@@ -26,46 +26,53 @@ struct AddShirtView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 8) {
-                    ForEach(shirts.indices, id: \.self) { index in
-                        Button(action: {
-                            selectedShirt = index
-                        }) {
-                            Image(uiImage: UIImage(data: shirts[index].imageData)!)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(12)
-                                .clipped()
-                                .blur(radius: selectedShirt == index ? 5 : 0)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(selectedShirt == index ? Color.blue : Color.clear, lineWidth: 3)
-                                )
+            if !shirts.isEmpty {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 8) {
+                        ForEach(shirts.indices, id: \.self) { index in
+                            Button(action: {
+                                selectedShirt = index
+                            }) {
+                                Image(uiImage: UIImage(data: shirts[index].imageData)!)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 100, height: 100)
+                                    .cornerRadius(12)
+                                    .clipped()
+                                    .blur(radius: selectedShirt == index ? 5 : 0)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(selectedShirt == index ? Color.blue : Color.clear, lineWidth: 3)
+                                    )
+                            }
+                        }
+                    }
+                    .padding()
+                }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            chooseShirt.toggle()
+                        }
+                    }
+                    ToolbarItem(placement: .principal) {
+                        Text("Choose a Shirt")
+                            .font(.headline)
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Confirm") {
+                            if let index = selectedShirt {
+                                shirtImg = UIImage(data: shirts[index].imageData)
+                            }
+                            chooseShirt.toggle()
                         }
                     }
                 }
-                .padding()
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        chooseShirt.toggle()
-                    }
-                }
-                ToolbarItem(placement: .principal) {
-                    Text("Choose a Shirt")
-                        .font(.headline)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Confirm") {
-                        if let index = selectedShirt {
-                            shirtImg = UIImage(data: shirts[index].imageData)
-                        }
-                        chooseShirt.toggle()
-                    }
-                }
+            } else {
+                Text("No Shirts Available, add some to create awesome outfits!\n\n😀")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.secondary)
+                    .padding()
             }
         }
     }
