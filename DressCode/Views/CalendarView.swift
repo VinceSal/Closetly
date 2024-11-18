@@ -29,6 +29,7 @@ struct CalendarView: View {
                 Spacer()
                 
                 Text("Welcome to your Calendar page!\n\nPlan your daily outfits by choosing them\nfrom the Outfits Page.\n\nClick the + button and let’s start!💪")
+                    .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 100)
                 

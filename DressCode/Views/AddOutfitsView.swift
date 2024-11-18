@@ -9,7 +9,21 @@ import SwiftUI
 
 struct AddOutfitsView: View {
     
+    @Environment(\.modelContext) var modelContext
+    
     @Binding var addingOutfits: Bool
+    
+    @State var chooseJacket: Bool = false
+    @State var chooseShirt: Bool = false
+    @State var chooseSweatshirt: Bool = false
+    @State var choosePant: Bool = false
+    @State var chooseShoe: Bool = false
+    
+    @State var jacketImg: UIImage?
+    @State var shirtImg: UIImage?
+    @State var sweatshirtImg: UIImage?
+    @State var pantImg: UIImage?
+    @State var shoeImg: UIImage?
     
     @State var outfitName: String = ""
     
@@ -29,87 +43,127 @@ struct AddOutfitsView: View {
                     .padding()
                 HStack(spacing: 20) {
                     Button {
-                        print("This is a button")
+                        chooseJacket.toggle()
                     } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.gray)
-                                .opacity(0.3)
-                                .frame(width: 150, height: 150)
-                            Image(systemName: "jacket")
+                        if jacketImg == nil {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.gray)
+                                    .opacity(0.3)
+                                    .frame(width: 150, height: 150)
+                                Image(systemName: "jacket")
+                                    .resizable()
+                                    .foregroundStyle(.black)
+                                    .frame(width: 130, height: 100)
+                            }
+                        } else {
+                            Image(uiImage: jacketImg!)
                                 .resizable()
-                                .foregroundStyle(.black)
-                                .frame(width: 130, height: 100)
+                                .scaledToFill()
+                                .frame(width: 150, height: 150)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     }
                     Button {
-                        print("This is a button")
+                        chooseShirt.toggle()
                     } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.gray)
-                                .opacity(0.3)
-                                .frame(width: 150, height: 150)
-                            Image(systemName: "tshirt")
+                        if shirtImg == nil {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.gray)
+                                    .opacity(0.3)
+                                    .frame(width: 150, height: 150)
+                                Image(systemName: "tshirt")
+                                    .resizable()
+                                    .foregroundStyle(.black)
+                                    .frame(width: 130, height: 100)
+                            }
+                        } else {
+                            Image(uiImage: shirtImg!)
                                 .resizable()
-                                .foregroundStyle(.black)
-                                .frame(width: 130, height: 100)
+                                .scaledToFill()
+                                .frame(width: 150, height: 150)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     }
                 }
                 HStack(spacing: 20) {
                     Button {
-                        print("This is a button")
+                        chooseSweatshirt.toggle()
                     } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.gray)
-                                .opacity(0.3)
-                                .frame(width: 150, height: 150)
-                            Image("hoodie")
+                        if sweatshirtImg == nil {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.gray)
+                                    .opacity(0.3)
+                                    .frame(width: 150, height: 150)
+                                Image("hoodie")
+                                    .resizable()
+                                    .frame(width: 130, height: 110)
+                            }
+                        } else {
+                            Image(uiImage: sweatshirtImg!)
                                 .resizable()
-                                .frame(width: 130, height: 110)
+                                .scaledToFill()
+                                .frame(width: 150, height: 150)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     }
                     Button {
-                        print("This is a button")
+                        choosePant.toggle()
                     } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.gray)
-                                .opacity(0.3)
-                                .frame(width: 150, height: 150)
-                            ZStack(alignment: .trailing) {
-                                Image(systemName: "square")
-                                    .bold()
-                                    .frame(width: 42)
-                                    .font(.system(size: 20))
-                                    .foregroundStyle(.black)
-                                    .padding(.bottom, 51)
-                                HStack(spacing: -27) {
-                                    Image(systemName: "rectangle.portrait")
-                                        .font(.system(size: 70))
-                                        .foregroundColor(.black)
-                                    Image(systemName: "rectangle.portrait")
-                                        .font(.system(size: 70))
-                                        .foregroundColor(.black)
+                        if pantImg == nil {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.gray)
+                                    .opacity(0.3)
+                                    .frame(width: 150, height: 150)
+                                ZStack(alignment: .trailing) {
+                                    Image(systemName: "square")
+                                        .bold()
+                                        .frame(width: 42)
+                                        .font(.system(size: 20))
+                                        .foregroundStyle(.black)
+                                        .padding(.bottom, 51)
+                                    HStack(spacing: -27) {
+                                        Image(systemName: "rectangle.portrait")
+                                            .font(.system(size: 70))
+                                            .foregroundColor(.black)
+                                        Image(systemName: "rectangle.portrait")
+                                            .font(.system(size: 70))
+                                            .foregroundColor(.black)
+                                    }
                                 }
                             }
+                        } else {
+                            Image(uiImage: pantImg!)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 150, height: 150)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     }
                 }
                 Button {
-                    print("This is a button")
+                    chooseShoe.toggle()
                 } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.gray)
-                            .opacity(0.3)
-                            .frame(width: 150, height: 150)
-                        Image(systemName: "shoe.2")
+                    if shoeImg == nil {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.gray)
+                                .opacity(0.3)
+                                .frame(width: 150, height: 150)
+                            Image(systemName: "shoe.2")
+                                .resizable()
+                                .foregroundStyle(.black)
+                                .frame(width: 90, height: 50)
+                        }
+                    } else {
+                        Image(uiImage: shoeImg!)
                             .resizable()
-                            .foregroundStyle(.black)
-                            .frame(width: 90, height: 50)
+                            .scaledToFill()
+                            .frame(width: 150, height: 150)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                 }
 
@@ -123,9 +177,32 @@ struct AddOutfitsView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
+                        let jacketData = jacketImg?.jpegData(compressionQuality: 0.8)
+                        let shirtData = shirtImg?.jpegData(compressionQuality: 0.8)
+                        let sweatshirtData = sweatshirtImg?.jpegData(compressionQuality: 0.8)
+                        let pantData = pantImg?.jpegData(compressionQuality: 0.8)
+                        let shoeData = shoeImg?.jpegData(compressionQuality: 0.8)
+                        let newOutfit = Outfit(name: outfitName, imageJacket: jacketData!, imageShirt: shirtData!, imageSweatshirt: sweatshirtData!, imagePant: pantData!, imageShoe: shoeData!)
+                        modelContext.insert(newOutfit)
                         addingOutfits.toggle()
                     }
+                    .disabled(outfitName == "" || jacketImg == nil || shirtImg == nil || sweatshirtImg == nil || pantImg == nil || shoeImg == nil)
                 }
+            })
+            .sheet(isPresented: $chooseJacket, content: {
+                AddJacketView(chooseJacket: $chooseJacket, jacketImg: $jacketImg)
+            })
+            .sheet(isPresented: $chooseShirt, content: {
+                AddShirtView(chooseShirt: $chooseShirt, shirtImg: $shirtImg)
+            })
+            .sheet(isPresented: $chooseSweatshirt, content: {
+                AddSweatshirtView(chooseSweatshirt: $chooseSweatshirt, sweatshirtImg: $sweatshirtImg)
+            })
+            .sheet(isPresented: $choosePant, content: {
+                AddPantView(choosePant: $choosePant, pantImg: $pantImg)
+            })
+            .sheet(isPresented: $chooseShoe, content: {
+                AddShoeView(chooseShoe: $chooseShoe, shoeImg: $shoeImg)
             })
         }
     }

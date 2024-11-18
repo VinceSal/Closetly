@@ -17,7 +17,14 @@ struct AddClothesView: View {
     @State var selectedColor: String = "White"
     
     var types = ["Jacket", "Sweatshirt", "Shirt", "Pant", "Shoe"]
+    var selectedTab: Int
     @State var selectedType: String = "Jacket"
+    
+    init(selectedTab: Int, addingClothes: Binding<Bool>) {
+        self.selectedTab = selectedTab
+        self._selectedType = State(initialValue: types[selectedTab])
+        self._addingClothes = addingClothes
+    }
     
     @State var description = ""
     @State var image: UIImage?
@@ -140,7 +147,7 @@ struct AddClothesView: View {
 }
 
 #Preview {
-    AddClothesView(addingClothes: .constant(true))
+    AddClothesView(selectedTab: 0, addingClothes: .constant(true))
 }
 
 // Camera Code

@@ -14,6 +14,6 @@ struct DressCodeApp: App {
         WindowGroup {
             ContainerView()
         }
-        .modelContainer(for: Clothe.self) // Initialize the swiftData container for this model
+        .modelContainer(for: [Clothe.self, Outfit.self]) // Initialize the swiftData container for this model
     }
 }

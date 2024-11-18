@@ -54,7 +54,7 @@ struct ClosetView: View {
             .navigationTitle("Closet")
             .fontWeight(.bold)
             .fullScreenCover(isPresented: $addingClothes) {
-                AddClothesView(addingClothes: $addingClothes)
+                AddClothesView(selectedTab: selectedSegment, addingClothes: $addingClothes)
             }
             
         }
