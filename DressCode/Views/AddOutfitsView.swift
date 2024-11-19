@@ -118,22 +118,9 @@ struct AddOutfitsView: View {
                                     .fill(Color.gray)
                                     .opacity(0.3)
                                     .frame(width: 150, height: 150)
-                                ZStack(alignment: .trailing) {
-                                    Image(systemName: "square")
-                                        .bold()
-                                        .frame(width: 42)
-                                        .font(.system(size: 20))
-                                        .foregroundStyle(.black)
-                                        .padding(.bottom, 51)
-                                    HStack(spacing: -27) {
-                                        Image(systemName: "rectangle.portrait")
-                                            .font(.system(size: 70))
-                                            .foregroundColor(.black)
-                                        Image(systemName: "rectangle.portrait")
-                                            .font(.system(size: 70))
-                                            .foregroundColor(.black)
-                                    }
-                                }
+                                Image("pant")
+                                    .resizable()
+                                    .frame(width: 130, height: 110)
                             }
                         } else {
                             Image(uiImage: pantImg!)
