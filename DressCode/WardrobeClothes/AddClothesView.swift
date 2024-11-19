@@ -50,7 +50,12 @@ struct AddClothesView: View {
                                 Image(systemName: "camera")
                                     .resizable()
                                     .frame(width: 50, height: 40)
-                                Text("Take a photo")
+                                    .foregroundColor(.black)
+                                    .bold()
+                                Text("Take Photo")
+                                    .foregroundColor(.black)
+                                    .bold()
+                                    
                             }
                         }
                     } else {
@@ -99,6 +104,7 @@ struct AddClothesView: View {
                     Picker("Colors", selection: $selectedColor) {
                         ForEach(colors, id: \.self) {
                             Text($0)
+                            
                         }
                     }
                     .pickerStyle(.menu)

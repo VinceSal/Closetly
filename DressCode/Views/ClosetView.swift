@@ -23,7 +23,7 @@ struct ClosetView: View {
                     Text("Shoes").tag(4)
                 }
                 .pickerStyle(.segmented)
-                .colorMultiply(.blue)
+                .colorMultiply(.white)
                 .padding(.horizontal)
                 .padding(.top)
                 

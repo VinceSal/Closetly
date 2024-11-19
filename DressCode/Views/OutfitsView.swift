@@ -21,7 +21,7 @@ struct OutfitsView: View {
                     Text("Favorites").tag(1)
                 }
                 .pickerStyle(.segmented)
-                .colorMultiply(.blue)
+                .colorMultiply(.white)
                 .padding(.horizontal)
                 .padding(.top)
                 
