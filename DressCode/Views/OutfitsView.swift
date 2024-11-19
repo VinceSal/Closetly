@@ -22,7 +22,8 @@ struct OutfitsView: View {
                 }
                 .pickerStyle(.segmented)
                 .colorMultiply(.blue)
-                .padding()
+                .padding(.horizontal)
+                .padding(.top)
                 
                 TabView(selection: $selectedSegment) {
                     AllOutfitsView()
@@ -43,7 +44,6 @@ struct OutfitsView: View {
                     }
                 }
             }
-            .padding(.bottom, 80)
             .navigationTitle("Outfits")
             .fontWeight(.bold)
             .fullScreenCover(isPresented: $addingOutfits) {
