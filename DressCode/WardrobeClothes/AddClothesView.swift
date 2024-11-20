@@ -6,17 +6,25 @@
 //
 
 import SwiftUI
+import UIKit
+
+extension View {
+    func dismissKeyboardOnTap() -> some View {
+        self.onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
+    }
+}
 
 struct AddClothesView: View {
     
     @Environment(\.modelContext) var modelContext
-    
     @Binding var addingClothes: Bool
     
     var colors = ["White", "Black", "Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Brown", "Pink", "Multicolor"]
     @State var selectedColor: String = "White"
     
-    var types = ["Jacket", "Sweatshirt", "Shirt", "Pant", "Shoe"]
+    var types = ["Jackets", "Sweatshirts", "Shirts", "Pants", "Shoes"]
     var selectedTab: Int
     @State var selectedType: String = "Jacket"
     
@@ -55,7 +63,6 @@ struct AddClothesView: View {
                                 Text("Take Photo")
                                     .foregroundColor(.black)
                                     .bold()
-                                    
                             }
                         }
                     } else {
@@ -104,7 +111,6 @@ struct AddClothesView: View {
                     Picker("Colors", selection: $selectedColor) {
                         ForEach(colors, id: \.self) {
                             Text($0)
-                            
                         }
                     }
                     .pickerStyle(.menu)
@@ -122,6 +128,7 @@ struct AddClothesView: View {
                 }
             }
             .padding(.bottom, 30)
+            .dismissKeyboardOnTap()
             .toolbar(content: {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
@@ -135,18 +142,16 @@ struct AddClothesView: View {
                         modelContext.insert(newItem)
                         addingClothes.toggle()
                     }
-                    .disabled(image == nil) // To ensure they fill in the photo
+                    .disabled(image == nil)
                 }
             })
             .fullScreenCover(isPresented: $showCamera) {
                 ImagePicker(image: self.$image, sourceType: .camera)
                     .edgesIgnoringSafeArea(.all)
             }
-            
             .fullScreenCover(isPresented: $showGallery) {
                 ImagePicker(image: self.$image, sourceType: .photoLibrary)
                     .edgesIgnoringSafeArea(.bottom)
-                
             }
         }
     }
