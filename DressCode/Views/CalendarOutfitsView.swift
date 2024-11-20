@@ -12,6 +12,7 @@ struct CalendarOutfitsView: View {
     
     @Binding var showOutfits: Bool
     var selectedDate: Date
+    var onConfirm: () -> Void
     @Query var outfits: [Outfit]
     @State private var selectedOutfits: [Outfit] = []
     
@@ -94,6 +95,7 @@ struct CalendarOutfitsView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Confirm") {
                         confirmSelection()
+                        onConfirm()
                         showOutfits.toggle()
                     }
                 }
@@ -119,5 +121,5 @@ struct CalendarOutfitsView: View {
 }
 
 #Preview {
-    CalendarOutfitsView(showOutfits: .constant(true), selectedDate: Date())
+    CalendarOutfitsView(showOutfits: .constant(true), selectedDate: Date(), onConfirm: {print("outfits confirmed")})
 }

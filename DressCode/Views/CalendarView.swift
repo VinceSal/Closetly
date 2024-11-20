@@ -88,6 +88,9 @@ struct CalendarView: View {
                             .padding()
                         }
                     }
+                    .shadow(radius: 2)
+                    .scrollContentBackground(.hidden)
+                    .background(Color.white)
                 }
             }
             .toolbar {
@@ -101,7 +104,13 @@ struct CalendarView: View {
                 }
             }
             .sheet(isPresented: $showOutfits, content: {
-                CalendarOutfitsView(showOutfits: $showOutfits, selectedDate: date)
+                CalendarOutfitsView(
+                    showOutfits: $showOutfits,
+                    selectedDate: date,
+                    onConfirm: {
+                        filterOutfits(for: date) // Refresh filtered outfits
+                    }
+                )
             })
             .navigationBarTitle("Calendar")
             .onAppear {
